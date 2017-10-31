@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © 2013-2017 GiaPhuGroup Ltd. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * @var \PHPCuong\ProductCollection\Block\ProductList $block
+ */
+?>
+<div class="block widget block-products-list grid">
+    <div class="content-heading">
+        <h2 class="title"><?php /* @escapeNotVerified */ echo __('Newest Products'); ?></h2>
+        <p class="info"><?php /* @escapeNotVerified */ echo __('Here is what\'s latest in our shop right now'); ?></p>
+    </div>
+    <div class="block-content">
+        <div class="products-grid grid">
+            <ol class="product-items widget-product-grid">
+                <?php $iterator = 1; ?>
+            <?php foreach($items = $block->getProducts() as $product): ?>
+                <?php /* @escapeNotVerified */ echo($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
+                    <div class="product-item-info">
+                        <a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl(); ?>" class="product-item-photo">
+                            <span class="product-image-container" style="width:240px;">
+                                <span class="product-image-wrapper" style="padding-bottom: 125%;">
+                                    <img class="product-image-photo" src="<?php echo $block->getProductImage($product); ?>" width="240" height="300" alt="<?php echo $block->escapeHtml($product->getName()); ?>">
+                                </span>
+                            </span>
+                        </a>
+                        <div class="product-item-details">
+                            <strong class="product-item-name">
+                                <a title="<?php echo $block->escapeHtml($product->getName()); ?>"
+                                   href="<?php /* @escapeNotVerified */ echo $product->getProductUrl(); ?>"
+                                   class="product-item-link">
+                                    <?php echo $block->escapeHtml($product->getName()); ?>
+                                </a>
+                            </strong>
+                        </div>
+                    </div>
+                <?php echo($iterator == count($items)+1) ? '</li>' : '' ?>
+            <?php endforeach; ?>
+            </ol>
+        </div>
+    </div>
+</div>
